@@ -17,9 +17,8 @@ In times when people including jQuery only to find an element by tag name, there
 A working example can be found here: [datipi.bolvin.de](http://datipi.bolvin.de)
 
 ## Browser Support ##
-Personally I tested it in Mozilla Firefox & Google Chrome.
-
-Technically, it should work more or less in all modern browsers >= Internet Explorer 9
+DaTiPi is tested in Mozilla Firefox, Google Chrome and Internet Explorer 9, 10 and 11.
+It should work in most modern browser. Older browsers than IE9 are not supported.
 
 ## Usage
 Include the script and css file in the head
@@ -31,7 +30,7 @@ A DaTiPi instance is created for each input field with the class after DOM is re
 
 ### Method 2: Initialize picker by code ###
     var myField = document.getElementById('datetime');
-    var myPicker = new DATIPI(elements[i]);
+    var myPicker = new DATIPI(myField);
 
 ## License
 
