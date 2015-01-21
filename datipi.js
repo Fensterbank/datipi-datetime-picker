@@ -42,13 +42,40 @@
     }
 
     /**
+     * Add a css class to an element's class list. Alternative for classList.add, which does not exist in IE9
+     * @param element
+     * @param className
+     */
+    function addClass(element, className) {
+      var classes = element.className.split(' ');
+      if (classes.indexOf(className) == -1) {
+        classes.push(className);
+      }
+      element.className = classes.join(' ');
+    }
+
+    /**
+     * Remove a css class from an element's class list. Alternative for classList.remove, which does not exist in IE9
+     * @param element
+     * @param className
+     */
+    function removeClass(element, className) {
+      var classes = element.className.split(' ');
+      var index = classes.indexOf(className);
+      if (index != -1) {
+        classes.splice(index, 1);
+      }
+      element.className = classes.join(' ');
+    }
+
+    /**
      * Reset the picker by preparing elements without recreating all new
      * Is called, when the same picker is opened more than once
      */
     function reset() {
       clock.style.display = 'none';
       container.style.display = 'block';
-      calendar.classList.remove('datipi-circle-hidden');
+      removeClass(calendar, 'datipi-circle-hidden');
       calendar.style.display = 'block';
       btnPreviousMonth.style.display = 'inline-block';
       btnNextMonth.style.display = 'inline-block';
@@ -170,11 +197,11 @@
         cell.innerHTML = currentRenderDate.getDate().toString();
         // This is the selected date. Mark it
         if (currentString == current) {
-          cell.classList.add('selected');
+          addClass(cell, 'selected');
         }
         // The day is not in the current month. Mark it
         if (currentRenderDate.getMonth() != lastDayOfMonth.getMonth()) {
-          cell.classList.add('outerMonth');
+          addClass(cell, 'outerMonth');
         }
         cell.setAttribute('data-date' , currentString);
         cell.addEventListener('click', onDateSelect);
@@ -314,9 +341,9 @@
         elem = document.createElement('div');
         elem.innerHTML = num;
         elem.setAttribute('style', 'top:' + obj.top + ';left:' + obj.left);
-        elem.classList.add('datipi-tick');
+        addClass(elem, 'datipi-tick');
         if (obj.bigger) {
-          elem.classList.add('datipi-bigger');
+          addClass(elem, 'datipi-bigger');
         }
 
         if (clickCallback != null) {
@@ -386,7 +413,7 @@
 
       btnPreviousMonth.style.display = 'none';
       btnNextMonth.style.display = 'none';
-      calendar.classList.add('datipi-circle-hidden');
+      addClass(calendar, 'datipi-circle-hidden');
 
       window.setTimeout(function () {
         calendar.style.display = 'none';
@@ -409,10 +436,10 @@
       currentDateTime.setHours(parseInt(this.innerHTML));
       updateInputValue();
 
-      parent.classList.add('datipi-circle-hidden');
+      addClass(parent, 'datipi-circle-hidden');
 
-      minutes.classList.remove('datipi-circle-hidden');
-      minutes.classList.add('datipi-circle-selector');
+      removeClass(minutes, 'datipi-circle-hidden');
+      addClass(minutes, 'datipi-circle-selector');
       window.setTimeout(function () {
         parent.style.display = 'none';
         minutes.style.visibility = 'visible';
