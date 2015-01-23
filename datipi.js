@@ -514,11 +514,23 @@
   };
 
   // Initiate DaTiPi input fields when DOM is ready
-  if (document.readyState != 'loading'){
-    initElements();
-  } else {
-    document.addEventListener('DOMContentLoaded', initElements);
+  var ready = false;
+
+  // Listen for "DOMContentLoaded"
+  document.addEventListener("DOMContentLoaded", init);
+  // Listen for "onreadystatechange"
+  document.onreadystatechange = init;
+  // Listen for "load"
+  document.addEventListener("load", init);
+
+  // Gets called after any one of the above is triggered.
+  function init() {
+    if (!ready) {
+      ready = true;
+      initElements();
+    }
   }
+
 
   function initElements() {
     var elements = document.querySelectorAll('input.datipi');
